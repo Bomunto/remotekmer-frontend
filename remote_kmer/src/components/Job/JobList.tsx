@@ -1,47 +1,18 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import {useJob} from "@/hooks/JobOffer/useJob";
 // Import icon images if you're using local assets
 // import siteIcon from './icons/site-icon.png';
 // import locationIcon from './icons/location-icon.png';
 
-const jobs = [
-    { id: 1, title: 'Alternance - Sales Development Representative', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 2, title: 'Assistant Commercial H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 3, title: 'Assistant administratif H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 4, title: 'Assistant Marketing H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 5, title: 'Assistant Support Logiciel H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 6, title: 'Assistant Support Utilisateurs H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 1, title: 'Alternance - Sales Development Representative', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 2, title: 'Assistant Commercial H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 3, title: 'Assistant administratif H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 4, title: 'Assistant Marketing H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 5, title: 'Assistant Support Logiciel H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 6, title: 'Assistant Support Utilisateurs H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-
-    { id: 1, title: 'Alternance - Sales Development Representative', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 2, title: 'Assistant Commercial H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 3, title: 'Assistant administratif H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 4, title: 'Assistant Marketing H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 5, title: 'Assistant Support Logiciel H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 6, title: 'Assistant Support Utilisateurs H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-
-    { id: 1, title: 'Alternance - Sales Development Representative', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 2, title: 'Assistant Commercial H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 3, title: 'Assistant administratif H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 4, title: 'Assistant Marketing H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 5, title: 'Assistant Support Logiciel H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 6, title: 'Assistant Support Utilisateurs H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-
-    { id: 1, title: 'Alternance - Sales Development Representative', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 2, title: 'Assistant Commercial H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 3, title: 'Assistant administratif H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 4, title: 'Assistant Marketing H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site, Hybride' },
-    { id: 5, title: 'Assistant Support Logiciel H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-    { id: 6, title: 'Assistant Support Utilisateurs H/F', location: 'Montagnat, Auvergne-Rhône-Alpes, France', type: 'Sur site' },
-
-];
-
 export default function JobList() {
+
+    const {jobOffers, loading} = useJob();
+    if(loading) {
+        return <div>Loading...</div>
+    }
     return (
         <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -52,16 +23,16 @@ export default function JobList() {
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-2 gap-4 px-6">
-                    {jobs.map((job) => (
+                    {jobOffers.map((job) => (
                         <div key={job.id} className="border p-4 rounded-lg shadow-sm">
                             <h3 className="font-semibold text-black">{job.title}</h3>
                             <div className="flex items-center text-black text-sm my-2">
-                                <span>{job.type}</span>
+                                <span>{job.shortDescription}</span>
                             </div>
                             <div className="flex items-center text-black text-sm">
-                                <span>{job.location}</span>
+                                <span className="font-bold">{job.location}</span>
                             </div>
-                            <Link href={`/jobs/${job.id}`} passHref>
+                            <Link href={`/jobdetails/${job.id}`}>
                                 <button className="mt-4 bg-black text-white transition ease-in-out delay-150 rounded py-2 px-4 block w-full hover:-translate-y-1 hover:scale-110 hover:bg-gray-800">
                                     Afficher
                                 </button>

@@ -1,0 +1,97 @@
+ <>
+                            <h2 className="font-semibold leading-6 text-indigo-600">{jobDetails.title}</h2>
+                            <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+                                {jobDetails.description}
+                            </p>
+                            <div className="mt-8">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="mb-4">
+                                        <label htmlFor="applicantName" className="block text-sm font-medium text-gray-700">
+                                            Nom
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="applicantName"
+                                            id="applicantName"
+                                            required
+                                            value={form.applicantName}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="applicantEmail" className="block text-sm font-medium text-gray-700">
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            name="applicantEmail"
+                                            id="applicantEmail"
+                                            required
+                                            value={form.applicantEmail}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="applicantPhone" className="block text-sm font-medium text-gray-700">
+                                            Téléphone
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            name="applicantPhone"
+                                            id="applicantPhone"
+                                            required
+                                            value={form.applicantPhone}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="cvFile" className="block text-sm font-medium text-gray-700">
+                                            CV
+                                        </label>
+                                        <input
+                                            type="file"
+                                            name="cvFile"
+                                            id="cvFile"
+                                            required
+                                            onChange={handleFileChange}
+                                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="photoFile" className="block text-sm font-medium text-gray-700">
+                                            Photo
+                                        </label>
+                                        <input
+                                            type="file"
+                                            name="photoFile"
+                                            id="photoFile"
+                                            required
+                                            onChange={handleFileChange}
+                                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="coverLetterFile" className="block text-sm font-medium text-gray-700">
+                                            Lettre de motivation
+                                        </label>
+                                        <input
+                                            type="file"
+                                            name="coverLetterFile"
+                                            id="coverLetterFile"
+                                            required
+                                            onChange={handleFileChange}
+                                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="mt-4 bg-black text-white transition ease-in-out delay-150 rounded py-2 px-4 block w-full hover:-translate-y-1 hover:scale-110 hover:bg-gray-800"
+                                    >
+                                        Postuler
+                                    </button>
+                                </form>
+                            </div>
+                        </>
