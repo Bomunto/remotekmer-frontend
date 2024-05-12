@@ -17,25 +17,20 @@ export interface ApplicantDataForm{
     applicantEmail: string;
     applicantPhone: string;
     applicationDate: Date;
-    cv: File;
-    photo: File;
-    coverLetter: File;
+    cvFile: File;
+    coverLetterFile: File;
     jobOfferIds: number[];
 }
 
 export interface JobOfferDataForm {
 
-    id: number
+    id: number,
+    enterpriseName: string,
     title: string,
     shortDescription: string,
     enterpriseIntroduction: string,
-    postDescription: string,
-    principalResponsability: string,
-    competencies: string,
-    requiredQualifications: string,
-    optionalQualifications: string,
-    postDetails: string,
-    advantage: string,
+    profileSearch: [],
+    postMission: [],
     applyMethod: string,
     location: string,
     salary: string,

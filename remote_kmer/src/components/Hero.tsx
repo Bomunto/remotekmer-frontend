@@ -1,6 +1,29 @@
 "use client"
+import React, { useState } from 'react';
+import { searchJobOffer } from '@/api/routes';
+import Search from "@/components/Search";
+
+
+
 
 export default function Hero() {
+
+    const [searchTitle, setSearchTitle] = useState('');
+
+    const handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSearchTitle(event.target.value);
+    };
+
+    const handleSearchSubmit = async (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        if (!searchTitle) return;
+        try {
+            const results = await searchJobOffer(searchTitle);
+            console.log(results); // Ici, vous pourriez vouloir faire quelque chose avec les résultats
+        } catch (error) {
+            console.error('Error searching job offers:', error);
+        }
+    };
     return (
         <div className="bg-[#F4F7FA] ">
             <div className="relative isolate px-6 lg:px-8">
@@ -19,18 +42,7 @@ export default function Hero() {
                             pour recevoir les annonces par mail.</p>
 
                         <div className="mt-10 flex items-center justify-center gap-x-6">
-
-                            <label htmlFor="email" className="sr-only">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="block w-9/12 rounded-md border-0 py-4 px-4 text-black shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-black focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
-                                placeholder="Recherche une offre"
-
-                            />
+                            <Search />
 
                         </div>
                     </div>

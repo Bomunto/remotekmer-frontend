@@ -26,12 +26,19 @@ export const fetchJobOfferById = async (id: number): Promise<JobOfferDataForm> =
     return response.data;
 }
 
+export const searchJobOffer = async (title: string): Promise<JobOfferDataForm[]> => {
+    const response = await axiosClient.get<JobOfferDataForm[]>(`/jobOffer/searchByTitle?title=${encodeURIComponent(title)}`);
+    return response.data;
+}
 
-export const applyJobOfferAsync = async (data: FormData): Promise<AxiosResponse> => {
-    const response = await axiosClient.post('/applicants/apply', data, {
+
+
+export const applyJobOfferAsync = async (data: FormData, additionalParams: any): Promise<AxiosResponse> => {
+    const url = `/applicants/apply?applicantName=${encodeURIComponent(additionalParams.applicantName)}&applicantEmail=${encodeURIComponent(additionalParams.applicantEmail)}&applicantPhone=${encodeURIComponent(additionalParams.applicantPhone)}&jobOfferId=${additionalParams.jobOfferId}`;
+    const response = await axiosClient.post(url, data, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     });
-    return response
-}
+    return response;
+};

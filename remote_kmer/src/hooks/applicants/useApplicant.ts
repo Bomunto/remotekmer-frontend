@@ -1,3 +1,4 @@
+/*
 import {useState} from "react";
 import {ApplicantDataForm} from "@/formData/formData";
 import {applyJobOfferAsync} from "@/api/routes";
@@ -43,3 +44,4 @@ export const useJobApplication = () => {
 
 
 
+*/
