@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react';
 import {fetchJobOfferById, applyJobOfferAsync} from "@/api/routes";
 import {JobOfferDataForm, ApplicantDataForm} from "@/formData/formData";
 import Hero from "@/components/Job/Hero";
+import Alerts from "@/components/Alerts";
 
 const jobdetails = ({params: { id } }: { params: any }) => {
     const router = useRouter();
@@ -19,10 +20,11 @@ const jobdetails = ({params: { id } }: { params: any }) => {
         coverLetterFile: {} as File,
         jobOfferIds: [parseInt(id as string, 10)]
     });
+    const [showAlerts, setShowAlerts] = useState(false);
 
     useEffect(() => {
         if (id) {
-            const jobId = parseInt(id as string, 10); // Assurez-vous que 'id' est un nombre
+            const jobId = parseInt(id as string, 10);
             setForm(currentForm => ({
                 ...currentForm,
                 jobOfferIds: [jobId]
@@ -62,6 +64,12 @@ const jobdetails = ({params: { id } }: { params: any }) => {
 
         try {
             await applyJobOfferAsync(formData, additionalParams);
+            setShowAlerts(true);
+            setTimeout(() => {
+                setShowAlerts(false);
+            }, 3000);
+            router.push("/");
+
         } catch (error) {
             console.error('Error applying for job offer:', error);
         }
@@ -105,8 +113,7 @@ const jobdetails = ({params: { id } }: { params: any }) => {
                                     </p>
 
 
-                                    <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">Procédures de
-                                        candidature</h2>
+                                    <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">Processus de recrutement</h2>
                                     <p className="mt-6">
                                         {jobDetails.applyMethod}
                                     </p>
@@ -228,6 +235,13 @@ const jobdetails = ({params: { id } }: { params: any }) => {
 
                         ) : (
                             <p>Chargement des détails du job...</p>
+                        )}
+                        {/* Display success notification after form submission */}
+                        {showAlerts && (
+                            <Alerts
+                                message={`Félicitations! Votre candidature au poste de ${jobDetails?.title} a été transmise avec succès.`}
+                                onClose={() => setShowAlerts(false)}
+                            />
                         )}
 
 
