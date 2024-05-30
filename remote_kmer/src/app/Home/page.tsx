@@ -7,9 +7,7 @@ import {SpotlightPreview} from "@/components/SpotlightPreview";
 import Search from "@/components/Search";
 import {BackgroundBeams} from "@/components/ui/background-beams";
 
-function classNames(...classes: any[]) {
-    return classes.filter(Boolean).join(' ')
-}
+
 
 export default function Acceuil() {
 

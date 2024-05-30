@@ -1,32 +1,15 @@
-/*
-  This example requires some changes to your config:
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import React, {useState} from "react";
 import {EnterpriseFormData} from "@/formData/formData";
 import {createEnterprise} from "@/api/routes";
-import IconCloud from "@/components/ui/icon-cloud";
-import GridPattern from "@/components/ui/grid-pattern";
+
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@headlessui/react'
-import { useToast } from "@/components/ui/use-toast"
-import {ToastAction} from "@/components/ui/toast";
-import {Toaster} from "@/components/ui/toaster";
 
+import Notification from "@/components/ui/notification";
 
 export default function RecruiterForm() {
 
-    const { toast } = useToast();
 
     function classNames(...classes: any[]) {
         return classes.filter(Boolean).join(' ');
@@ -48,6 +31,8 @@ export default function RecruiterForm() {
     });
 
     const [agreed, setAgreed] = useState(false);
+    const [showNotification, setShowNotification] = useState(false);
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
@@ -65,10 +50,25 @@ export default function RecruiterForm() {
         try {
             const response = await createEnterprise(formData);
             console.log('Enterprise Created:', response);
-            // Additional actions based on success (e.g., show success message or redirect)
+            setShowNotification(true);
+            // Réinitialiser le formulaire
+            setFormData({
+                searchProfile: '',
+                enterpriseName: '',
+                firstName: '',
+                lastName: '',
+                enterpriseEmail: '',
+                enterprisePhone: '',
+                enterpriseDescription: '',
+                contractType: 'CDI',
+                delay: 'UNE_SEMAINE',
+                lieuDuPoste: '',
+                civility: 'MR',
+                message: '',
+            });
+            setAgreed(false);
         } catch (error) {
             console.error('Error creating enterprise:', error);
-            // Handle errors (e.g., show error message)
         }
     };
 
@@ -361,6 +361,7 @@ export default function RecruiterForm() {
                     </svg>
                 </div>
             </div>
+            <Notification show={showNotification} setShow={setShowNotification} />
         </div>
     )
 }
