@@ -45,9 +45,8 @@ export default function FeatureEnterprise() {
                         </p>
                         <Image
                             src={Homme}
-                            width={1000}
-                            height={1000}
-                            priority={ true }
+                            width={500}
+                            height={500}
                             alt=""
                             className="mt-16 aspect-[6/5] w-full rounded-2xl bg-gray-50 object-cover lg:aspect-auto lg:h-[34.5rem]"
                         />
