@@ -29,8 +29,8 @@ export interface JobOfferDataForm {
     title: string,
     shortDescription: string,
     enterpriseIntroduction: string,
-    profileSearch: [],
-    postMission: [],
+    profileSearch: string,
+    postMission: string,
     applyMethod: string,
     location: string,
     salary: string,
@@ -54,4 +54,20 @@ export interface JobOfferAdminDataForm{
     postDate: Date
     categoryIds: number
     applicantsIds: []
+}
+
+
+export interface EnterpriseFormData {
+    searchProfile: string,
+    enterpriseName: string,
+    firstName: string,
+    lastName: string,
+    enterpriseEmail: string,
+    enterprisePhone: string,
+    enterpriseDescription: string,
+    contractType: "CDI"
+    delay: "UNE_SEMAINE",
+    lieuDuPoste: string,
+    civility: "MR",
+    message: string
 }

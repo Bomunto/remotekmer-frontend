@@ -1,6 +1,6 @@
 import axiosClient from '@/api/axios'
 import {
-    LoginDataForm, RegisterDataForm, JobOfferDataForm, ApplicantDataForm
+    LoginDataForm, RegisterDataForm, JobOfferDataForm, ApplicantDataForm, EnterpriseFormData
 } from "@/formData/formData";
 import {LoginOutputModel} from "@/api/models/outputs";
 import {AxiosResponse} from "axios";
@@ -42,3 +42,8 @@ export const applyJobOfferAsync = async (data: FormData, additionalParams: any):
     });
     return response;
 };
+
+
+export const createEnterprise = async (data: EnterpriseFormData) => {
+    await axiosClient.post('/enterprise/create', data)
+}

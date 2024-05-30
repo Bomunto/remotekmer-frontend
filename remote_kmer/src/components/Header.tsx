@@ -4,26 +4,24 @@ import {useState} from 'react'
 import {Dialog} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import Link from "next/link";
-
+import Image from "next/image";
+import Logo from "@/../public/EmploiZen.svg";
 const navigation = [
+
+/*    {name: 'Newsletter', href: '#'},*/
+    {name: 'Zen Talents', href: '/Talent'},
+   {name: 'Zen Startup', href: '/Enterprise'},
     {name: 'FAQ', href: '#'},
-    {name: 'Newsletter', href: '#'},
-    {name: 'Je suis une entreprise', href: '#'},
 ]
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
-        <header className="absolute inset-x-0 top-0 z-50 bg-black">
-            <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5">
-                        <span className="sr-only">Your Company</span>
-                        <img
-                            className="h-8 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt=""
-                        />
+        <header className="absolute inset-x-0 top-0 z-50 bg-[#15171F] h-20">
+            <nav className="flex items-center justify-between px-6 py-4 lg:px-8" aria-label="Global">
+                <div className="flex items-center flex-1">
+                    <Link href="/" className="block h-full">
+                        <p className="font-bold text-lg"> Emploi<span className="text-blue-600">Zen</span></p>
                     </Link>
                 </div>
                 <div className="flex lg:hidden">

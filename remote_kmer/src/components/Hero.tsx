@@ -33,17 +33,16 @@ export default function Hero() {
                             Découvrez les meilleurs emplois à distance
                         </h1>
                         <p className="mt-7 text-lg leading-8 text-black">
-                            Le premier site Camerounais dédiés au jobs 100% télétravail.
+                            La première plateforme Africaine dédiés aux jobs 100% télétravail.
                             <br/>
-
                         </p>
                         <p className="text-lg leading-8 text-black">Inscris toi à la
                             <span className="text-lg text-red-600"> newsletter </span>
-                            pour recevoir les annonces par mail.</p>
+                            pour recevoir les annonces par mail.
+                        </p>
 
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Search />
-
                         </div>
                     </div>
                 </div>

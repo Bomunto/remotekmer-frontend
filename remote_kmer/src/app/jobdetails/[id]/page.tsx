@@ -7,6 +7,8 @@ import {fetchJobOfferById, applyJobOfferAsync} from "@/api/routes";
 import {JobOfferDataForm, ApplicantDataForm} from "@/formData/formData";
 import Hero from "@/components/Job/Hero";
 import Alerts from "@/components/Alerts";
+import {HeroBackgroundBeams} from "@/components/HeroBackgroundBeams";
+import Acceuil from "@/app/Home/page";
 
 const jobdetails = ({params: { id } }: { params: any }) => {
     const router = useRouter();
@@ -77,14 +79,15 @@ const jobdetails = ({params: { id } }: { params: any }) => {
 
     return (
         <>
-            <Hero jobTitle={jobDetails?.title}/>
+
+            <HeroBackgroundBeams jobTitle={jobDetails?.title} />
             <div className="">
-                <div className="overflow-hidden bg-white px-6 py-16 lg:px-8 xl:py-36">
+                <div className="overflow-hidden bg-white px-6 py-10 lg:px-8 xl:py-10">
                     <div className="mx-auto max-w-max lg:max-w-7xl">
                         {jobDetails ? (
                             <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
                                 <p className="text-base font-semibold leading-7 text-red-600">{jobDetails.location}</p>
-                                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{jobDetails.title}</h1>
+                               {/* <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{jobDetails.title}</h1>*/}
                                 <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">Présentation</h2>
                                 <p className="mt-6 text-justify leading-8">
                                     {jobDetails.enterpriseIntroduction}
@@ -95,28 +98,19 @@ const jobdetails = ({params: { id } }: { params: any }) => {
                                     <h2 className="mt-20 text-2xl  font-bold tracking-tight text-gray-900"> Le profil
                                         recherché</h2>
                                     <p className="mt">
-                                        {jobDetails.profileSearch.map((item) =>
                                             <div>
-                                                <p className="mt-6 text-justify"> {item}</p>
+                                                <p className="mt-6 text-justify"> {jobDetails.profileSearch}</p>
                                             </div>
-                                        )}
                                     </p>
                                     <h2 className="mt-20 text-2xl font-bold tracking-tight text-gray-900">Missions du
                                         poste</h2> <br/>
 
                                     <p>
-                                        {jobDetails.postMission.map((item) => (
                                             <div>
-                                                <p className=" text-justify">  {item}</p>
+                                                <p className=" text-justify">  {jobDetails.postMission}</p>
                                             </div>
-                                        ))}
                                     </p>
 
-
-                                    <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">Processus de recrutement</h2>
-                                    <p className="mt-6">
-                                        {jobDetails.applyMethod}
-                                    </p>
                                 </div>
                                 <div className="px-2 mt-20">
                                     <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">Envoyez votre
@@ -248,6 +242,7 @@ const jobdetails = ({params: { id } }: { params: any }) => {
                     </div>
                 </div>
             </div>
+
         </>
 
     );
