@@ -1,7 +1,7 @@
 // page.tsx
 "use client"
 
-import {useRouter} from 'next/router';
+import {useRouter} from 'next/navigation';
 import {useState, useEffect} from 'react';
 import {fetchJobOfferById, applyJobOfferAsync} from "@/api/routes";
 import {JobOfferDataForm, ApplicantDataForm} from "@/formData/formData";
@@ -10,12 +10,7 @@ import Alerts from "@/components/Alerts";
 import {HeroBackgroundBeams} from "@/components/HeroBackgroundBeams";
 import Acceuil from "@/app/Home/page";
 
-interface JobDetailProps {
-    params: { id: string };
-}
-
-const JobDetail: React.FC<JobDetailProps> = ({ params: { id } }) => {
-
+const jobdetails = ({params: { id } }: { params: any }) => {
     const router = useRouter();
     const [jobDetails, setJobDetails] = useState<JobOfferDataForm | null>(null);
     const [form, setForm] = useState<ApplicantDataForm>({
@@ -23,15 +18,15 @@ const JobDetail: React.FC<JobDetailProps> = ({ params: { id } }) => {
         applicantEmail: '',
         applicantPhone: '',
         applicationDate: new Date(),
-        cvFile: new File([], ""),
-        coverLetterFile: new File([], ""),
-        jobOfferIds: [parseInt(id, 10)]
+        cvFile: {} as File,
+        coverLetterFile: {} as File,
+        jobOfferIds: [parseInt(id as string, 10)]
     });
     const [showAlerts, setShowAlerts] = useState(false);
 
     useEffect(() => {
         if (id) {
-            const jobId = parseInt(id, 10);
+            const jobId = parseInt(id as string, 10);
             setForm(currentForm => ({
                 ...currentForm,
                 jobOfferIds: [jobId]
@@ -39,6 +34,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ params: { id } }) => {
             const fetchJobDetails = async () => {
                 const job = await fetchJobOfferById(jobId);
                 setJobDetails(job);
+                console.log(job);
             };
 
             fetchJobDetails();
@@ -46,12 +42,12 @@ const JobDetail: React.FC<JobDetailProps> = ({ params: { id } }) => {
     }, [id]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        setForm({...form, [e.target.name]: e.target.value});
     }
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setForm({ ...form, [e.target.name]: e.target.files[0] });
+            setForm({...form, [e.target.name]: e.target.files[0]});
         }
     }
 
@@ -71,8 +67,11 @@ const JobDetail: React.FC<JobDetailProps> = ({ params: { id } }) => {
         try {
             await applyJobOfferAsync(formData, additionalParams);
             setShowAlerts(true);
-            setTimeout(() => setShowAlerts(false), 3000);
+            setTimeout(() => {
+                setShowAlerts(false);
+            }, 3000);
             router.push("/");
+
         } catch (error) {
             console.error('Error applying for job offer:', error);
         }
@@ -249,4 +248,4 @@ const JobDetail: React.FC<JobDetailProps> = ({ params: { id } }) => {
     );
 }
 
-export default JobDetail;
+export default jobdetails;
