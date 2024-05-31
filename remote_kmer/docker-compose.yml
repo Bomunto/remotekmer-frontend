@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_SERVER_HOST: "http://b0c0wso.95.216.143.68.sslip.io:3090/v1/api"
