@@ -11,7 +11,6 @@ const navigation = [
 /*    {name: 'Newsletter', href: '#'},*/
     {name: 'Zen Talents', href: '/Talent'},
    {name: 'Zen Startup', href: '/Enterprise'},
-    {name: 'FAQ', href: '#'},
 ]
 
 export default function Header() {
