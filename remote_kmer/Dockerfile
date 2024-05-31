@@ -33,5 +33,6 @@ RUN npm install -g next
 # Exposer le port sur lequel l'application va s'exécuter
 EXPOSE 3000
 
+ENV NEXT_PUBLIC_SERVER_HOST=http://b0c0wso.95.216.143.68.sslip.io:3090/v1/api
 # Commande pour démarrer l'application
 CMD ["next", "start"]
