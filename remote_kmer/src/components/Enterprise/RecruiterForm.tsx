@@ -1,16 +1,13 @@
+import React, { useState } from "react";
+import { EnterpriseFormData } from "@/formData/formData";
+import { createEnterprise } from "@/api/routes";
 
-import React, {useState} from "react";
-import {EnterpriseFormData} from "@/formData/formData";
-import {createEnterprise} from "@/api/routes";
-
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { Switch } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Switch } from '@headlessui/react';
 
 import Notification from "@/components/ui/notification";
 
 export default function RecruiterForm() {
-
-
     function classNames(...classes: any[]) {
         return classes.filter(Boolean).join(' ');
     }
@@ -33,7 +30,6 @@ export default function RecruiterForm() {
     const [agreed, setAgreed] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
 
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
             ...formData,
@@ -51,7 +47,7 @@ export default function RecruiterForm() {
             const response = await createEnterprise(formData);
             console.log('Enterprise Created:', response);
             setShowNotification(true);
-            // Réinitialiser le formulaire
+            // Reset form
             setFormData({
                 searchProfile: '',
                 enterpriseName: '',
@@ -72,11 +68,9 @@ export default function RecruiterForm() {
         }
     };
 
-
-
     return (
         <div className="bg-[#15171F] py-16 sm:py-24">
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div
                     className="relative isolate overflow-hidden bg-[#15171F] px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32">
                     <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -86,10 +80,9 @@ export default function RecruiterForm() {
                         Remplissez ce formulaire pour nous faire part de vos besoins en recrutement et découvrir des talents exceptionnels prêts à rejoindre votre équipe.
                     </p>
                     <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
-                        <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
-                            <div className="sm:col-span-3">
-                                <label htmlFor="searchProfile"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="sm:col-span-2">
+                                <label htmlFor="searchProfile" className="block text-sm font-semibold leading-6 text-white">
                                     Profil recherché <span className="text-red-500"> *</span>
                                 </label>
                                 <div className="mt-2.5">
@@ -106,12 +99,11 @@ export default function RecruiterForm() {
                                     />
                                 </div>
                             </div>
-                            <div className="sm:col-span-3">
-                                <label htmlFor="contractType"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div>
+                                <label htmlFor="contractType" className="block text-sm font-semibold leading-6 text-white">
                                     Type de contrat <span className="text-red-500"> *</span>
                                 </label>
-                                <div className="mt-2.5">
+                                <div className="mt-2.5 relative">
                                     <select
                                         id="contractType"
                                         name="contractType"
@@ -123,16 +115,11 @@ export default function RecruiterForm() {
                                         <option value="CDD">CDD</option>
                                         <option value="MISSION">Mission</option>
                                     </select>
-                                    <ChevronDownIcon
-                                        className="pointer-events-none absolute right-3 top-0 h-full w-5 text-black"
-                                        aria-hidden="true"
-                                    />
+                                    <ChevronDownIcon className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black" aria-hidden="true" />
                                 </div>
-
                             </div>
-                            <div className="sm:col-span-3">
-                                <label htmlFor="lieuDuPoste"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div>
+                                <label htmlFor="lieuDuPoste" className="block text-sm font-semibold leading-6 text-white">
                                     Lieu du poste <span className="text-red-500"> *</span>
                                 </label>
                                 <div className="mt-2.5">
@@ -148,14 +135,16 @@ export default function RecruiterForm() {
                                     />
                                 </div>
                             </div>
-                            <div className="sm:col-span-3">
+                            <div>
                                 <label htmlFor="delay" className="block text-sm font-semibold leading-6 text-white">
                                     Sous quel délai ? <span className="text-red-500"> *</span>
                                 </label>
-                                <div className="mt-2.5">
+                                <div className="mt-2.5 relative">
                                     <select
                                         id="delay"
                                         name="delay"
+                                        value={formData.delay}
+                                        onChange={handleChange}
                                         className="block w-full rounded-md border-0 px-3.5 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     >
                                         <option value="UNE_SEMAINE">Une Semaine</option>
@@ -163,15 +152,11 @@ export default function RecruiterForm() {
                                         <option value="TROIS_MOIS">Trois Mois</option>
                                         <option value="AUTRE">Autre</option>
                                     </select>
-                                    <ChevronDownIcon
-                                        className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                                        aria-hidden="true"
-                                    />
+                                    <ChevronDownIcon className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
                                 </div>
                             </div>
-                            <div className="sm:col-span-6">
-                                <label htmlFor="enterpriseName"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div>
+                                <label htmlFor="enterpriseName" className="block text-sm font-semibold leading-6 text-white">
                                     Entreprise <span className="text-red-500"> *</span>
                                 </label>
                                 <div className="mt-2.5">
@@ -187,12 +172,11 @@ export default function RecruiterForm() {
                                     />
                                 </div>
                             </div>
-                            <div className="sm:col-span-2">
-                                <label htmlFor="civility"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div className="sm:col-span-1">
+                                <label htmlFor="civility" className="block text-sm font-semibold leading-6 text-white">
                                     Civilité <span className="text-red-500"> *</span>
                                 </label>
-                                <div className="mt-2.5">
+                                <div className="mt-2.5 relative">
                                     <select
                                         name="civility"
                                         id="civility"
@@ -205,15 +189,11 @@ export default function RecruiterForm() {
                                         <option value="MME">Madame</option>
                                         <option value="MLLE">Mademoiselle</option>
                                     </select>
-                                    <ChevronDownIcon
-                                        className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                                        aria-hidden="true"
-                                    />
+                                    <ChevronDownIcon className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
                                 </div>
                             </div>
-                            <div className="sm:col-span-2">
-                                <label htmlFor="lastName"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div className="sm:col-span-1">
+                                <label htmlFor="lastName" className="block text-sm font-semibold leading-6 text-white">
                                     Nom <span className="text-red-500"> *</span>
                                 </label>
                                 <div className="mt-2.5">
@@ -224,14 +204,13 @@ export default function RecruiterForm() {
                                         value={formData.lastName}
                                         onChange={handleChange}
                                         autoComplete="lastName"
-                                        placeholder="Smith "
+                                        placeholder="Smith"
                                         className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
                                 </div>
                             </div>
-                            <div className="sm:col-span-2 ">
-                                <label htmlFor="firstName"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div className="sm:col-span-1">
+                                <label htmlFor="firstName" className="block text-sm font-semibold leading-6 text-white">
                                     Prénom
                                 </label>
                                 <div className="mt-2.5">
@@ -247,10 +226,8 @@ export default function RecruiterForm() {
                                     />
                                 </div>
                             </div>
-
-
-                            <div className="sm:col-span-3">
-                                <label htmlFor="email" className="block text-sm font-semibold leading-6 text-white">
+                            <div className="">
+                                <label htmlFor="enterpriseEmail" className="block text-sm font-semibold leading-6 text-white">
                                     Email <span className="text-red-500"> *</span>
                                 </label>
                                 <div className="mt-2.5">
@@ -266,9 +243,8 @@ export default function RecruiterForm() {
                                     />
                                 </div>
                             </div>
-                            <div className="sm:col-span-3">
-                                <label htmlFor="enterprisePhone"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div className="sm:col-span-2">
+                                <label htmlFor="enterprisePhone" className="block text-sm font-semibold leading-6 text-white">
                                     Numéro de téléphone <span className="text-red-500"> *</span>
                                 </label>
                                 <div className="mt-2.5">
@@ -283,24 +259,23 @@ export default function RecruiterForm() {
                                     />
                                 </div>
                             </div>
-                            <div className="sm:col-span-6">
-                                <label htmlFor="message"
-                                       className="block text-sm font-semibold leading-6 text-white">
+                            <div className="sm:col-span-2">
+                                <label htmlFor="message" className="block text-sm font-semibold leading-6 text-white">
                                     Message
                                 </label>
                                 <div className="mt-2.5">
-                                      <textarea
-                                          name="message"
-                                          placeholder="Dites-nous-en plus sur votre projet de recrutement"
-                                          id="message"
-                                          rows={4}
-                                          value={formData.message}
-                                          onChange={handleChange}
-                                          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                      />
+                                    <textarea
+                                        name="message"
+                                        placeholder="Dites-nous-en plus sur votre projet de recrutement"
+                                        id="message"
+                                        rows={4}
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
                                 </div>
                             </div>
-                            <Switch.Group as="div" className="flex gap-x-4 sm:col-span-4">
+                            <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
                                 <div className="flex h-6 items-center">
                                     <Switch
                                         checked={agreed}
@@ -330,7 +305,6 @@ export default function RecruiterForm() {
                         </div>
                         <div className="mt-10">
                             <button
-
                                 type="submit"
                                 className="block w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                             >
@@ -343,8 +317,7 @@ export default function RecruiterForm() {
                         className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2"
                         aria-hidden="true"
                     >
-                        <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
-                                fillOpacity="0.7"/>
+                        <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />
                         <defs>
                             <radialGradient
                                 id="759c1415-0410-454c-8f7c-9a820de03641"
@@ -354,8 +327,8 @@ export default function RecruiterForm() {
                                 gradientUnits="userSpaceOnUse"
                                 gradientTransform="translate(512 512) rotate(90) scale(512)"
                             >
-                                <stop stopColor="#0000FF"/>
-                                <stop offset={1} stopColor="#0000FF" stopOpacity={0}/>
+                                <stop stopColor="#0000FF" />
+                                <stop offset={1} stopColor="#0000FF" stopOpacity={0} />
                             </radialGradient>
                         </defs>
                     </svg>

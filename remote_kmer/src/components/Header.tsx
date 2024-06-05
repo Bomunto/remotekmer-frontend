@@ -20,9 +20,10 @@ export default function Header() {
             <nav className="flex items-center justify-between px-6 py-4 lg:px-8" aria-label="Global">
                 <div className="flex items-center flex-1">
                     <Link href="/" className="block h-full">
-                        <p className="font-bold text-lg"> Emploi<span className="text-blue-600">Zen</span></p>
+                        <p className="font-bold text-lg text-white "> Emploi<span className="text-blue-600">Zen</span></p>
                     </Link>
                 </div>
+
                 <div className="flex lg:hidden">
                     <button
                         type="button"
@@ -52,14 +53,11 @@ export default function Header() {
                 <Dialog.Panel
                     className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
-                        <a href="#" className="-m-1.5 p-1.5">
+                        <Link href="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
-                            <img
-                                className="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                alt=""
-                            />
-                        </a>
+                            <p className="font-bold text-lg text-black dark:text-white "> Emploi<span
+                                className="text-blue-600">Zen</span></p>
+                        </Link>
                         <button
                             type="button"
                             className="-m-2.5 rounded-md p-2.5 text-gray-700"
